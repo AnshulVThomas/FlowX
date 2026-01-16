@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  --color-flowx-black: #050505;
+  --color-flowx-accent: #00ff88;
+  --color-flowx-glass: rgba(255, 255, 255, 0.03);
+  --color-flowx-border: rgba(255, 255, 255, 0.08);
+
+  @keyframes status-pulse {
+    0%, 100% { opacity: 1; filter: drop-shadow(0 0 2px #00ff88); }
+    50% { opacity: 0.4; filter: drop-shadow(0 0 8px #00ff88); }
+  }
+  --animate-status-pulse: status-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom Utilities for flowX */
+@utility glass-panel {
+  background-color: var(--color-flowx-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-flowx-border);
+}
+
+@utility flowx-node {
+  @apply glass-panel rounded-lg transition-all duration-300;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-flowx-black);
+    color: #e0e0e0;
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow: hidden;
+  }
+}
+
+/* React Flow Overrides 
+   Note: We avoid using @apply with !important here to prevent Vite errors.
+   Standard CSS is the most reliable way to override library styles in v4.
+*/
+
+.react-flow__handle {
+  background-color: var(--color-flowx-accent) !important;
+  border: none !important;
+  width: 8px !important;
+  height: 8px !important;
+}
+
+.react-flow__controls {
+  background-color: var(--color-flowx-glass) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--color-flowx-border) !important;
+  box-shadow: none !important;
+}
+
+.react-flow__controls-button {
+  border-bottom: 1px solid var(--color-flowx-border) !important;
+  background: transparent !important;
+}
+
+.react-flow__controls-button svg {
+  fill: white !important;
+}
